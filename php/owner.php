@@ -294,6 +294,7 @@ $rName = $_SESSION["roleName"];
         <br>
         <br>
         <div class="movies_table" id="moviestable">
+            <script src="dltmv.js" type="text/javascript"></script>
             <table align="center" border="1px" style="width:400px; line-height:30px; color:white; ">
             <thead>
                 <tr>
@@ -337,37 +338,14 @@ $rName = $_SESSION["roleName"];
             echo "<td>" . $row["endDate"]."</td>";
 
             $url = "deletefrommov.php?movie_id=$movie_id";
-            echo "<td>" ."<br><center><a class='link' style=font-size: 28px;  href=#; movid=$movie_id>Remove</a>". "</td>";
+            echo "<td>" ."<br><center><a class='link' style=font-size: 28px;  href=#; movid=$movie_id>Remove</a>"."</td>";
             
             $url2 = "editMovie.php?movie_id=$movie_id";
             echo "<td>" ."<br><center><a class='addtofav_button' style=font-size: 28px;  href=$url2>Edit</a>". "</td>";
 
             echo "</tr>";
         ?>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript" ></script>
-            <script type="text/javascript">
-            $(function(){
-                $('.link').click(function(){
-                    var elem = $(this);
-        
-
-                    var ajaxReq= $.ajax({
-                                    type: "GET",
-                                    url: "deletefrommov.php",
-                                    data: "id="+elem.attr('movid')
-                                }).fail(function(){
-                                    elem.remove();
-                                    alert("fail");
-                                }).done(function(data){
-                                 
-
-                                   elem.closest("tr").remove();
-                                });
-
-                    return false;
-                });
-            });
-            </script>
+            
 
 
        
