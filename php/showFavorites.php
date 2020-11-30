@@ -261,7 +261,7 @@ $rName = $_SESSION["roleName"];
                                     data: "id="+elem.attr('movid')
                                 }).fail(function(){
                                     elem.remove();
-                                    alert("fail");
+                         
                                 }).done(function(data){
                                     //alert("done");
                                     // $(this).closest('tr').remove();

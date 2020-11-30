@@ -12,7 +12,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 
 
-$user_id = $_GET["id"];
+$user_id = $_GET['usrid'];
 
 //first we need to delete the user from other tables that reference the users table 
 $sql = "DELETE FROM favorites WHERE id = $user_id"; 
@@ -28,7 +28,8 @@ if($stmt = mysqli_prepare($conn, $sql)){
             if($stmt = mysqli_prepare($conn, $sql)){
                 if(mysqli_stmt_execute($stmt)){
                     mysqli_close($conn);
-                    header('Location: administration.php');
+                    echo json_encode(array('success'=>TRUE,'message'=>"User Deleted"));
+                 //   header('Location: administration.php');
                     exit;
                 }
 

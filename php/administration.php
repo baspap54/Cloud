@@ -45,7 +45,24 @@ $rName = $_SESSION["roleName"];
             background-color: hsla(556, 50%, 25%, 0.3);   
             
         }
-        
+        a:link {
+            background-color: #620000;
+            border-radius: 4px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            padding: 5px 25px;
+            text-decoration: none;
+            font-size: 15px;
+            font-family: sans-serif;
+        }
+        a:link, a:visited {
+            color: #fff;
+        }
+        a:hover{
+            cursor: pointer;
+            background:  #ff0000;
+            color: #000;
+        }
 
         h0{
             position: relative;
@@ -240,14 +257,42 @@ $rName = $_SESSION["roleName"];
             echo "<td>" ."<br><center><a class='addtofav_button' style=font-size: 28px;  href=$urlConfirm>Confirm</a>"
             ."<center><a class='addtofav_button' style=font-size: 28px; class=back_button; href=$urlDeny>Reject</a>". "</td>";
 
-            $urlDelete = "deleteUser.php?id=$user_id";
-            echo "<td>" ."<br><center><a class='addtofav_button' style=font-size: 28px;  href=$urlDelete>Delete</a>". "</td>";   
+            //$urlDelete = "deleteUser.php?id=$user_id";
+            //echo "<td>" ."<br><center><a class='addtofav_button' style=font-size: 28px;  href=$urlDelete>Delete</a>". "</td>"; 
+
+            echo "<td>" ."<br><center><a class='link' style=font-size: 28px; href=#; usrid=$user_id>Remove</a>". "</td>";
 
             echo "</tr>";
             }
             echo "</table>";
             ?>
 
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+            <script type="text/javascript">
+            $(function(){
+                $('.link').click(function(){
+                    var elem = $(this);
+              
+
+                    var ajaxReq= $.ajax({
+                                    type: "GET",
+                                    url: "deleteUser.php",
+                                    data: "usrid="+elem.attr('usrid')
+                                }).fail(function(){
+                                    elem.remove();
+                                  
+                                }).done(function(data){
+                           
+
+                                   elem.closest("tr").remove();
+                                });
+
+                    return false;
+                });
+            });
+            </script>
+ 
 
             </table>
         </div>
