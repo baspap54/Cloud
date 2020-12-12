@@ -276,7 +276,7 @@ $rName = $_SESSION["roleName"];
 
         <h1 style="font-size: 17px;font-family: serif;"> &#129409 User: <b><?php echo htmlspecialchars($_SESSION["userName"]); echo("($rName)"); ?></b> </h1>
         </div>
-        <script src="addmv.js" type="text/javascript"></script>
+        
         <form class=form3 id="addmov" method="post">
 
         <label for="titleId" >Title</label>
@@ -303,7 +303,7 @@ $rName = $_SESSION["roleName"];
             <table id="editable_table" align="center" border="1px" style="width:400px; line-height:30px; color:white;" >
             <thead>
                 <tr>
-                    <th colspan="8"><h2 align="center">My Movies </h2></th>
+                    <th colspan="6"><h2 align="center">My Movies </h2></th>
                 </tr>
                 <tr>    
                          
