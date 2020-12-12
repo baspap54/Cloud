@@ -74,6 +74,9 @@ $rName = $_SESSION["roleName"];
         <meta charset="UTF-8">
         <title>PLACEHOLDER</title>
         <link rel="stylesheet" type="text/css">
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js" type="text/javascript" ></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>    
         <style>
             
             body{
@@ -293,27 +296,30 @@ $rName = $_SESSION["roleName"];
         <br>
         <br>
         <br>
+        <div class="table-responsive">  
         <div class="movies_table" id="moviestable">
             <script src="dltmv.js" type="text/javascript"></script>
-            <table align="center" border="1px" style="width:400px; line-height:30px; color:white; ">
+            <script src="jquery.tabledit.min.js"></script>
+            <table id="editable_table" align="center" border="1px" style="width:400px; line-height:30px; color:white;" >
             <thead>
                 <tr>
-                    <th colspan="7"><h2>My Movies</h2></th>
+                    <th colspan="8"><h2 align="center">My Movies </h2></th>
                 </tr>
-                <tr>                    
+                <tr>    
+                         
                     <th> Title </th>
                     <th> Category </th>
                     <th> Start Date </th>
                     <th> End Date </th>
                     <th> Remove </th>
-                    <th> Edit </th>
+                   
                 </tr>
             </thead>
         
-        </br>
-        </br>
-        </br>
-
+        <br/>
+        <br/>
+        <br/>
+        <tbody>
         <?php
            
             $owned = "SELECT * FROM movies WHERE cinemaName = '$u_name'";
@@ -327,27 +333,28 @@ $rName = $_SESSION["roleName"];
 
             while($row=mysqli_fetch_assoc($movs))
             {
-           
-            echo "<tr>";
-            echo "<td>" . $row["title"]."</td>";
+            $url2 = "editMovie.php?movie_id=$movie_id";
+            $movie_id= $row["movie_id"];
+            echo '<tr>
+            <td style="display: none">' . $row["movie_id"].'</td>
+            <td>' . $row["title"].'</td>
           
         
-            echo "<td>" . $row["category"]."</td>";
-            $movie_id= $row["movie_id"];
-            echo "<td>" . $row["startDate"]."</td>";
-            echo "<td>" . $row["endDate"]."</td>";
-
-            $url = "deletefrommov.php?movie_id=$movie_id";
-            echo "<td>" ."<br><center><a class='link' style=font-size: 28px;  href=#; movid=$movie_id>Remove</a>"."</td>";
+            <td>'  . $row["category"].'</td>
             
-            $url2 = "editMovie.php?movie_id=$movie_id";
-            echo "<td>" ."<br><center><a class='addtofav_button' style=font-size: 28px;  href=$url2>Edit</a>". "</td>";
+            <td>'  . $row["startDate"].'</td>
+            <td>'  . $row["endDate"].'</td>
 
-            echo "</tr>";
+            
+            <td>'  ."<br><center><a class='link' style=font-size: 28px;  href=#; movid=$movie_id>Remove</a>".'</td>
+            
+            
+
+            </tr>';
         ?>
             
 
-
+        </tbody>
        
         </div>
             
@@ -364,6 +371,7 @@ $rName = $_SESSION["roleName"];
         ?>
 
         </table>
+    </div>
 
     </body>
 
@@ -372,3 +380,18 @@ $rName = $_SESSION["roleName"];
 
 
 </html>  
+
+<script>  
+$(document).ready(function(){  
+     $('#editable_table').Tabledit({
+      url:'action.php',
+      columns:{
+       identifier:[0, "movie_id"],
+       editable:[[1, 'title'], [2, 'category'], [3, 'startDate'], [4, 'endDate']]
+      },
+      restoreButton:false,
+      
+     });
+ 
+});  
+ </script>

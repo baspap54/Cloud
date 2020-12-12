@@ -41,10 +41,7 @@
                                     elem.remove();
                                     alert("fail");
                                 }).done(function(data){
-                                    //alert("done");
-                                    // $(this).closest('tr').remove();
-                                    //ocation.reload ()
-                                   
+
                                     $('#moviestable').load('owner.php' + ' #moviestable');
                                    
                                    
